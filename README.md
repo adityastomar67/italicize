@@ -27,6 +27,4 @@
 
 ## Usage
 
-## Calling directly inside terminal
-
 ## Dependencies

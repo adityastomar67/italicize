@@ -1,4 +1,4 @@
-local conf = require("config")
+local conf = require("italicize.config")
 
 local M = {}
 

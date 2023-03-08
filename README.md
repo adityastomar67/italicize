@@ -1,7 +1,7 @@
 <div align="center">
 
   <h1><a href="https://github.com/adityastomar67/nvim-highlights">Nvim Highlights</a></h1>
-  <h3>Make any colorscheme transparent or italicize your fav highlight groups</h3>
+  <h3>Make any Neovim Colorscheme to support for Italics and Transparency.</h3>
 
   <!-- <a href="https://github.com/adityastomar67/nvim-highlights/blob/main/LICENSE.md">
   <img alt="License" src="https://img.shields.io/github/license/adityastomar67/nvim-highlights?style=flat&color=eee&label="> </a> -->

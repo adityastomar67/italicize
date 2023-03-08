@@ -1,4 +1,4 @@
-local conf = require("config").config
+local conf = require("lua.italicize.config").config
 
 local M = {}
 

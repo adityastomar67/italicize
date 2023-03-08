@@ -23,20 +23,20 @@ local function _add_highlights()
         highlight(group)
     end
 
-    if type(conf.extra_groups) == "string" then
-        if conf.extra_groups == "all" then
-            local hls = vim.split(vim.api.nvim_exec("highlight", true), "\n")
-            for _, hl in ipairs(hls) do
-                highlight(nil)
-            end
-        else
-            highlight(conf.extra_italics_groups)
-        end
-    else
-        for _, group in ipairs(conf.extra_italics_groups) do
-            highlight(group)
-        end
-    end
+    -- if type(conf.extra_groups) == "string" then
+    --     if conf.extra_groups == "all" then
+    --         local hls = vim.split(vim.api.nvim_exec("highlight", true), "\n")
+    --         for _, hl in ipairs(hls) do
+    --             highlight(nil)
+    --         end
+    --     else
+    --         highlight(conf.extra_italics_groups)
+    --     end
+    -- else
+    --     for _, group in ipairs(conf.extra_italics_groups) do
+    --         highlight(group)
+    --     end
+    -- end
 end
 
 

@@ -24,7 +24,7 @@ M.config = {
         "TSConstBuiltin",
         "TSEmphasis",
         "TSEnvironmentName",
-        "TSInclude ",
+        "TSInclude",
         "TSKeywordReturn",
         "TSLabel",
         "TSParameter",

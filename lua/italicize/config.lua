@@ -20,7 +20,7 @@ M.config = {
         "NvimTreeFileRenamed",
         "NvimTreeMarkdownFile",
         "NvimTreeOpenedFile",
-        "NvimTreeRootFolderf",
+        "NvimTreeRootFolder",
         "TSConstBuiltin",
         "TSEmphasis",
         "TSEnvironmentName",

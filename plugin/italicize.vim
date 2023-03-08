@@ -20,7 +20,7 @@ augroup END
 
 augroup italics
     autocmd!
-    "  autocmd VimEnter,ColorScheme * lua require('italicize').add_highlights()
+    autocmd VimEnter,ColorScheme * lua require('italicize').add_highlights()
     command -bar -nargs=0 ItalicsEnable lua require('italicize.italicize').toggle_italics(true)
     command -bar -nargs=0 ItalicsDisable lua require('italicize.italicize').toggle_italics(false)
     command -bar -nargs=0 ItalicsToggle lua require('italicize.italicize').toggle_italics()

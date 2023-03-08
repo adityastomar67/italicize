@@ -80,7 +80,8 @@ M.config = {
         "Underlined",
         "VertSplit",
     },
-    extra_groups = {},
+    extra_italics_groups = {},
+    extra_transparent_groups = {},
     exclude = {}
 }
 

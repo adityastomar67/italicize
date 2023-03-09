@@ -15,7 +15,7 @@ local clear_group_bg = function(group, highlights)
     highlights = highlights or vim.api.nvim_exec("hi " .. group, true)
 
     if
-        vim.tbl_contains(conf.exclude, group)
+        vim.tbl_contains(conf.exclude_transparency_group, group)
         or (conf.ignore_linked_group and highlights:match("links to"))
     then
         return
@@ -30,21 +30,6 @@ local function _clear_bg()
     for _, group in ipairs(conf.transparent_groups) do
         clear_group_bg(group)
     end
-
-    -- if type(conf.extra_groups) == "string" then
-    --     if conf.extra_groups == "all" then
-    --         local hls = vim.split(vim.api.nvim_exec("highlight", true), "\n")
-    --         for _, hl in ipairs(hls) do
-    --             clear_group_bg(nil, hl)
-    --         end
-    --     else
-    --         clear_group_bg(conf.extra_groups)
-    --     end
-    -- else
-    --     for _, group in ipairs(conf.extra_groups) do
-    --         clear_group_bg(group)
-    --     end
-    -- end
 end
 
 function M.clear_bg()

@@ -1,26 +1,13 @@
 local conf = require("italicize.config").config
 
-local M = {}
-
-local function update_hl(group, tbl)
+local function update_hl(group)
+    if vim.tbl_contains(conf.exclude_italics_group, group)
+    then
+        return
+    end
     local old_hl = vim.api.nvim_get_hl_by_name(group, true)
-    local new_hl = vim.tbl_extend('force', old_hl, tbl)
+    local new_hl = vim.tbl_extend('force', old_hl, { italic = true })
     vim.api.nvim_set_hl(0, group, new_hl)
-end
-
--- update_hl('Comment', { italic = true })
-
-
-local function highlight(group)
-    -- local fg    = color.fg and 'guifg=' .. color.fg or 'guifg=NONE'
-    -- local bg    = color.bg and 'guibg=' .. color.bg or 'guibg=NONE'
-    local style = 'gui=italic'
-    -- local sp    = color.sp and 'guisp=' .. color.sp or ''
-
-    vim.api.nvim_command(string.format(
-        'highlight %s %s',
-        group, style
-    ))
 end
 
 local function _add_highlights()
@@ -28,26 +15,11 @@ local function _add_highlights()
         return
     end
     for _, group in ipairs(conf.italics_groups) do
-        update_hl(group, { italic = true })
+        update_hl(group)
     end
-
-    -- if type(conf.extra_groups) == "string" then
-    --     if conf.extra_groups == "all" then
-    --         local hls = vim.split(vim.api.nvim_exec("highlight", true), "\n")
-    --         for _, hl in ipairs(hls) do
-    --             highlight(nil)
-    --         end
-    --     else
-    --         highlight(conf.extra_italics_groups)
-    --     end
-    -- else
-    --     for _, group in ipairs(conf.extra_italics_groups) do
-    --         highlight(group)
-    --     end
-    -- end
 end
 
-
+local M = {}
 
 function M.add_highlights()
     if vim.g.italics_enabled ~= true then

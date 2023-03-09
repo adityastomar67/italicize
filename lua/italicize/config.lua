@@ -1,8 +1,8 @@
 local M = {}
 
 M.config = {
-    transparent_enable = false,
-    italics_enable = false,
+    transparency = false,
+    italics = false,
     ignore_linked_group = true,
     italics_groups = {
         "Comment",
@@ -80,9 +80,8 @@ M.config = {
         "Underlined",
         "VertSplit",
     },
-    extra_italics_groups = {},
-    extra_transparent_groups = {},
-    exclude = {}
+    exclude_transparency_group = {},
+    exclude_italics_group = {}
 }
 
 return M

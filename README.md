@@ -23,8 +23,114 @@
 
 </div>
 
-**COMING SOON...**
-
 ## Usage
 
-## Dependencies
+You can easily toggle the the transparency and italics with the `TransparentToggle`, `ItalicsToggle` respectively.
+If you put true to the italics and transparency in the setup, it will automatically enably on any colorscheme you apply.
+```lua
+require("italicize").setup({
+    transparency = true,
+    italics = true,
+})
+```
+
+### Install
+
+```lua
+use {
+  "adityastomar67/italicize",
+  config = function ()
+    require("italicize").setup()
+  end
+}
+```
+
+### Configuration
+
+##### Default Options:
+These are the default options for italicize which can be configured via the setup function:
+```lua
+{
+    transparency = false,
+    italics = false,
+    ignore_linked_group = true,
+    italics_groups = {
+        "Comment",
+        "Conditional",
+        "Identifier",
+        "SpecialChar",
+        "SpecialComment",
+        "String",
+        "Todo",
+        "CmpItemKind",
+        "StartifyPath",
+        "StartifySlash",
+        "packerString",
+        "NvimTreeGitRenamed",
+        "NvimTreeFileRenamed",
+        "NvimTreeMarkdownFile",
+        "NvimTreeOpenedFile",
+        "NvimTreeRootFolder",
+        "TSConstBuiltin",
+        "TSEmphasis",
+        "TSEnvironmentName",
+        "TSInclude",
+        "TSKeywordReturn",
+        "TSLabel",
+        "TSParameter",
+        "TSProperty",
+        "TSCharacter",
+        "TSComment",
+        "TSConditional",
+        "TSFuncBuiltin",
+        "TSFunction",
+        "TSKeyword",
+        "TSKeywordFunction",
+        "TSMethod",
+        "TSRepeat",
+        "TSString",
+        "TSStringEscape",
+        "TSStringRegex",
+        "TSStringSpecial",
+        "TSVariable",
+        "TSVariableBuiltin",
+    },
+    transparent_groups = {
+        "Comment",
+        "Conditional",
+        "Constant",
+        "CursorLineNr",
+        "CursorLineNR",
+        "EndOfBuffer",
+        "Function",
+        "Identifier",
+        "LineNr",
+        "NonText",
+        "Normal",
+        "NormalNC",
+        "Operator",
+        "PreProc",
+        "Repeat",
+        "SignColumn",
+        "Special",
+        "StalineFilename",
+        "Statement",
+        "String",
+        "Structure",
+        "Todo",
+        "TodoSignDONE",
+        "TodoSignFIX ",
+        "TodoSignHACK",
+        "TodoSignNOTE",
+        "TodoSignPERF",
+        "TodoSignTEST",
+        "TodoSignTODO",
+        "TodoSignWARN",
+        "Type",
+        "Underlined",
+        "VertSplit",
+    },
+    exclude_transparency_group = {},
+    exclude_italics_group = {}
+}
+```

@@ -1,25 +1,25 @@
 <div align="center">
 
-  <h1><a href="https://github.com/adityastomar67/nvim-highlights">Nvim Highlights</a></h1>
+  <h1><a href="https://github.com/adityastomar67/italicize">Italicize</a></h1>
   <h3>Make any Neovim Colorscheme to support for Italics and Transparency.</h3>
 
-  <!-- <a href="https://github.com/adityastomar67/nvim-highlights/blob/main/LICENSE.md">
-  <img alt="License" src="https://img.shields.io/github/license/adityastomar67/nvim-highlights?style=flat&color=eee&label="> </a> -->
+  <a href="https://github.com/adityastomar67/italicize/blob/main/LICENSE.md">
+  <img alt="License" src="https://img.shields.io/github/license/adityastomar67/italicize?style=flat&color=eee&label="> </a>
 
-  <a href="https://github.com/adityastomar67/nvim-highlights/graphs/contributors">
-  <img alt="People" src="https://img.shields.io/github/contributors/adityastomar67/nvim-highlights?style=flat&color=ffaaf2&label=People"> </a>
+  <a href="https://github.com/adityastomar67/italicize/graphs/contributors">
+  <img alt="People" src="https://img.shields.io/github/contributors/adityastomar67/italicize?style=flat&color=ffaaf2&label=People"> </a>
 
-  <a href="https://github.com/adityastomar67/nvim-highlights/stargazers">
-  <img alt="Stars" src="https://img.shields.io/github/stars/adityastomar67/nvim-highlights?style=flat&color=98c379&label=Stars"></a>
+  <a href="https://github.com/adityastomar67/italicize/stargazers">
+  <img alt="Stars" src="https://img.shields.io/github/stars/adityastomar67/italicize?style=flat&color=98c379&label=Stars"></a>
 
-  <a href="https://github.com/adityastomar67/nvim-highlights/network/members">
-  <img alt="Forks" src="https://img.shields.io/github/forks/adityastomar67/nvim-highlights?style=flat&color=66a8e0&label=Forks"> </a>
+  <a href="https://github.com/adityastomar67/italicize/network/members">
+  <img alt="Forks" src="https://img.shields.io/github/forks/adityastomar67/italicize?style=flat&color=66a8e0&label=Forks"> </a>
 
-  <a href="https://github.com/adityastomar67/nvim-highlights/watchers">
-  <img alt="Watches" src="https://img.shields.io/github/watchers/adityastomar67/nvim-highlights?style=flat&color=f5d08b&label=Watches"> </a>
+  <a href="https://github.com/adityastomar67/italicize/watchers">
+  <img alt="Watches" src="https://img.shields.io/github/watchers/adityastomar67/italicize?style=flat&color=f5d08b&label=Watches"> </a>
 
-  <a href="https://github.com/adityastomar67/nvim-highlights/pulse">
-  <img alt="Last Updated" src="https://img.shields.io/github/last-commit/adityastomar67/nvim-highlights?style=flat&color=e06c75&label="> </a>
+  <a href="https://github.com/adityastomar67/italicize/pulse">
+  <img alt="Last Updated" src="https://img.shields.io/github/last-commit/adityastomar67/italicize?style=flat&color=e06c75&label="> </a>
 
 </div>
 

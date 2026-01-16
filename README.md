@@ -1,41 +1,51 @@
 <div align="center">
 
-  <h1><a href="https://github.com/adityastomar67/italicize">Italicize</a></h1>
-  <h3>Make any Neovim Colorscheme to support for Italics and Transparency.</h3>
+  <h1>Italicize.nvim</h1>
+
+  <p>
+    <strong>Force Transparency and Italics support onto <em>any</em> Neovim Colorscheme.</strong>
+  </p>
 
   <a href="https://github.com/adityastomar67/italicize/blob/main/LICENSE.md">
-  <img alt="License" src="https://img.shields.io/github/license/adityastomar67/italicize?style=flat&color=eee&label="> </a>
-
-  <a href="https://github.com/adityastomar67/italicize/graphs/contributors">
-  <img alt="People" src="https://img.shields.io/github/contributors/adityastomar67/italicize?style=flat&color=ffaaf2&label=People"> </a>
+  <img alt="License" src="https://img.shields.io/github/license/adityastomar67/italicize?style=flat&color=eee&label=License"> </a>
 
   <a href="https://github.com/adityastomar67/italicize/stargazers">
-  <img alt="Stars" src="https://img.shields.io/github/stars/adityastomar67/italicize?style=flat&color=98c379&label=Stars"></a>
+  <img alt="Stars" src="https://img.shields.io/github/stars/adityastomar67/italicize?style=flat&color=e06c75&label=Stars"></a>
 
-  <a href="https://github.com/adityastomar67/italicize/network/members">
-  <img alt="Forks" src="https://img.shields.io/github/forks/adityastomar67/italicize?style=flat&color=66a8e0&label=Forks"> </a>
-
-  <a href="https://github.com/adityastomar67/italicize/watchers">
-  <img alt="Watches" src="https://img.shields.io/github/watchers/adityastomar67/italicize?style=flat&color=f5d08b&label=Watches"> </a>
+  <a href="https://github.com/adityastomar67/italicize/issues">
+  <img alt="Issues" src="https://img.shields.io/github/issues/adityastomar67/italicize?style=flat&color=61afef&label=Issues"> </a>
 
   <a href="https://github.com/adityastomar67/italicize/pulse">
-  <img alt="Last Updated" src="https://img.shields.io/github/last-commit/adityastomar67/italicize?style=flat&color=e06c75&label="> </a>
+  <img alt="Last Updated" src="https://img.shields.io/github/last-commit/adityastomar67/italicize?style=flat&color=98c379&label=Updated"> </a>
 
 </div>
 
-## Usage
+---
 
-You can easily toggle the the transparency and italics with the `TransparentToggle`, `ItalicsToggle` respectively.
-If you put true to the italics and transparency in the setup, it will automatically enably on any colorscheme you apply.
+## ✨ Features
+
+* **Universal Support:** Works with any colorscheme by dynamically modifying highlight groups.
+* **Granular Control:** Toggle transparency and italics independently.
+* **Persistent State:** Remembers your toggle state even if you reload the theme.
+* **Highly Configurable:** Easily add or exclude specific syntax groups.
+
+## 📦 Installation
+
+### Using [lazy.nvim](https://github.com/folke/lazy.nvim) (Recommended)
 ```lua
-require("italicize").setup({
-    transparency = true,
-    italics = true,
-})
+{
+  "adityastomar67/italicize",
+  event = "ColorScheme", -- Load when colorscheme changes
+  config = function()
+    require("italicize").setup({
+        transparency = true,
+        italics = false,
+    })
+  end
+}
 ```
 
-### Install
-
+### Using [packer.nvim](https://github.com/wbthomason/packer.nvim$0)
 ```lua
 use {
   "adityastomar67/italicize",
@@ -45,92 +55,87 @@ use {
 }
 ```
 
-### Configuration
-
-##### Default Options:
-These are the default options for italicize which can be configured via the setup function:
+## ⚙️ Configuration
+You can pass a table to the setup() function to override defaults.
 ```lua
-{
-    transparency = false,
-    italics = false,
-    ignore_linked_group = true,
-    italics_groups = {
-        "Comment",
-        "Conditional",
-        "Identifier",
-        "SpecialChar",
-        "SpecialComment",
-        "String",
-        "Todo",
-        "CmpItemKind",
-        "StartifyPath",
-        "StartifySlash",
-        "packerString",
-        "NvimTreeGitRenamed",
-        "NvimTreeFileRenamed",
-        "NvimTreeMarkdownFile",
-        "NvimTreeOpenedFile",
-        "NvimTreeRootFolder",
-        "TSConstBuiltin",
-        "TSEmphasis",
-        "TSEnvironmentName",
-        "TSInclude",
-        "TSKeywordReturn",
-        "TSLabel",
-        "TSParameter",
-        "TSProperty",
-        "TSCharacter",
-        "TSComment",
-        "TSConditional",
-        "TSFuncBuiltin",
-        "TSFunction",
-        "TSKeyword",
-        "TSKeywordFunction",
-        "TSMethod",
-        "TSRepeat",
-        "TSString",
-        "TSStringEscape",
-        "TSStringRegex",
-        "TSStringSpecial",
-        "TSVariable",
-        "TSVariableBuiltin",
-    },
-    transparent_groups = {
-        "Comment",
-        "Conditional",
-        "Constant",
-        "CursorLineNr",
-        "CursorLineNR",
-        "EndOfBuffer",
-        "Function",
-        "Identifier",
-        "LineNr",
-        "NonText",
-        "Normal",
-        "NormalNC",
-        "Operator",
-        "PreProc",
-        "Repeat",
-        "SignColumn",
-        "Special",
-        "StalineFilename",
-        "Statement",
-        "String",
-        "Structure",
-        "Todo",
-        "TodoSignDONE",
-        "TodoSignFIX ",
-        "TodoSignHACK",
-        "TodoSignNOTE",
-        "TodoSignPERF",
-        "TodoSignTEST",
-        "TodoSignTODO",
-        "TodoSignWARN",
-        "Type",
-        "Underlined",
-        "VertSplit",
-    },
-    exclude_transparency_group = {},
-    exclude_italics_group = {}
+require("italicize").setup({
+    -- Default Toggles
+    transparency = false,       -- Enable transparent background by default
+    italics = false,            -- Enable italics by default
+
+    -- Exclusions (Groups to ignore)
+    exclude_transparency_group = { "CursorLine", "Search" },
+    exclude_italics_group = { "Type" },
+
+    -- Overrides (Add your own groups here)
+    italics_groups = { "CustomGroup", "AnotherGroup" },
+    transparent_groups = { "NvimTreeNormal" }
+})
+```
+
+### Default Groups
+The plugin comes pre-configured with a comprehensive list of groups for standard syntax, TreeSitter, and popular plugins (Telescope, NvimTree, GitSigns, etc.).
+
+<details> <summary><strong>Click to view default Italic Groups</strong></summary>
+
+```lua
+italics_groups = {
+    "Comment",
+    "Conditional",
+    "Identifier",
+    "SpecialChar",
+    "SpecialComment",
+    "String",
+    "Todo",
+    "CmpItemKind",
+    -- TreeSitter / Modern Highlights
+    "@comment",
+    "@conditional",
+    "@keyword",
+    "@variable",
+    -- ... and many more
 }
 ```
+</details>
+
+<details> <summary><strong>Click to view default Transparent Groups</strong></summary>
+
+```lua
+transparent_groups = {
+    "Normal",
+    "NormalNC",
+    "NormalFloat",
+    "FloatBorder",
+    "LineNr",
+    "SignColumn",
+    "EndOfBuffer",
+    "MsgArea",
+    "NvimTreeNormal",
+    "TelescopeNormal",
+    "WhichKeyFloat",
+    -- ... and many more
+}
+```
+</details>
+
+## 🚀 Commands
+The plugin provides user commands to toggle effects on the fly.
+
+| Command | Description |
+| :--- | :--- |
+| `:TransparentToggle` | Toggle transparency on/off. |
+| `:TransparentEnable` | Force transparency on. |
+| `:TransparentDisable` | Force transparency off. |
+| `:ItalicsToggle` | Toggle italics on/off. |
+| `:ItalicsEnable` | Force italics on. |
+| `:ItalicsDisable` | Force italics off. |
+
+## ⌨️ Keybindings Example
+You can map these commands in your init.lua for quick access:
+
+```lua
+vim.keymap.set('n', '<leader>tt', '<cmd>TransparentToggle<cr>', { desc = "Toggle Transparency" })
+vim.keymap.set('n', '<leader>ti', '<cmd>ItalicsToggle<cr>', { desc = "Toggle Italics" })
+```
+
+<div align="center"> <sub>Built with ❤️ for Neovim</sub> </div>

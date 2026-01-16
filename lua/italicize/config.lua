@@ -22,6 +22,7 @@ M.config = {
         "NonText",
         "EndOfBuffer",
         "MsgArea",
+        "MsgSeparator",
         "Cmdline",
         "Pmenu",
 

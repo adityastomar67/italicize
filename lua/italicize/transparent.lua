@@ -1,20 +1,27 @@
 local config_module = require("italicize.config")
 local M = {}
 
--- Directly force the background to NONE, exactly like your snippet
 local function clear_group_bg(group)
-    -- We use force=true to ensure our 'none' overrides whatever was there before
-    vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
+    -- 1. Get the existing highlight properties (link=false gives us the actual colors)
+    local current_hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+
+    -- 2. Create a new definition by merging:
+    --    Existing Properties + { bg = "NONE" }
+    local new_hl = vim.tbl_extend("force", current_hl, {
+        bg = "NONE",
+        ctermbg = "NONE"
+    })
+
+    -- 3. Apply the updated definition
+    vim.api.nvim_set_hl(0, group, new_hl)
 end
 
 function M.clear_bg()
     local conf = config_module.config
-
     if not vim.g.transparent_enabled then return end
 
     for _, group in ipairs(conf.transparent_groups) do
-        -- We wrap in pcall just in case a weird group name causes an error,
-        -- but generally this will just work silently.
+        -- Use pcall to avoid errors if a group doesn't exist
         pcall(clear_group_bg, group)
     end
 end
@@ -26,17 +33,10 @@ function M.toggle_transparent(option)
         vim.g.transparent_enabled = option
     end
 
-    -- If we are disabling transparency, we must reload the colorscheme
-    -- to bring the backgrounds back.
-    if not vim.g.transparent_enabled then
-        if vim.g.colors_name then
-            vim.cmd.colorscheme(vim.g.colors_name)
-        end
-        return
+    -- Reload colorscheme to reset everything, then re-apply transparency
+    if vim.g.colors_name then
+        vim.cmd.colorscheme(vim.g.colors_name)
     end
-
-    -- If enabling, just apply the clears immediately
-    M.clear_bg()
 end
 
 return M

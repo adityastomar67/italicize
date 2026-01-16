@@ -1,32 +1,20 @@
-local conf = require("italicize.config").config
+local config_module = require("italicize.config")
 local M = {}
 
+-- Directly force the background to NONE, exactly like your snippet
 local function clear_group_bg(group)
-    if vim.tbl_contains(conf.exclude_transparency_group, group) then
-        return
-    end
-
-    -- link=false ensures we get the actual attributes, not just the link name
-    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-
-    if not next(hl) then return end
-
-    -- Check if this is a linked group and if we should ignore it
-    if conf.ignore_linked_group then
-        -- We check strictly for links by calling get_hl with link=true (default)
-        local is_link = vim.api.nvim_get_hl(0, { name = group, link = true })
-        if is_link.link then return end
-    end
-
-    -- Force background to NONE
-    local new_hl = vim.tbl_extend('force', hl, { bg = "NONE", ctermbg = "NONE" })
-    vim.api.nvim_set_hl(0, group, new_hl)
+    -- We use force=true to ensure our 'none' overrides whatever was there before
+    vim.api.nvim_set_hl(0, group, { bg = "NONE", ctermbg = "NONE" })
 end
 
 function M.clear_bg()
+    local conf = config_module.config
+
     if not vim.g.transparent_enabled then return end
 
     for _, group in ipairs(conf.transparent_groups) do
+        -- We wrap in pcall just in case a weird group name causes an error,
+        -- but generally this will just work silently.
         pcall(clear_group_bg, group)
     end
 end
@@ -38,10 +26,17 @@ function M.toggle_transparent(option)
         vim.g.transparent_enabled = option
     end
 
-    -- Reload colorscheme to reset; autocmd in init.lua handles re-application
-    if vim.g.colors_name then
-        vim.cmd.colorscheme(vim.g.colors_name)
+    -- If we are disabling transparency, we must reload the colorscheme
+    -- to bring the backgrounds back.
+    if not vim.g.transparent_enabled then
+        if vim.g.colors_name then
+            vim.cmd.colorscheme(vim.g.colors_name)
+        end
+        return
     end
+
+    -- If enabling, just apply the clears immediately
+    M.clear_bg()
 end
 
 return M

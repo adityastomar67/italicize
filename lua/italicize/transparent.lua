@@ -1,51 +1,34 @@
 local conf = require("italicize.config").config
-
 local M = {}
 
-local clear_group_bg = function(group, highlights)
-    if not (group or highlights) then
+local function clear_group_bg(group)
+    if vim.tbl_contains(conf.exclude_transparency_group, group) then
         return
     end
 
-    if group and vim.fn.highlight_exists(group) == 0 then
-        return
+    -- link=false ensures we get the actual attributes, not just the link name
+    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+
+    if not next(hl) then return end
+
+    -- Check if this is a linked group and if we should ignore it
+    if conf.ignore_linked_group then
+        -- We check strictly for links by calling get_hl with link=true (default)
+        local is_link = vim.api.nvim_get_hl(0, { name = group, link = true })
+        if is_link.link then return end
     end
 
-    group = group or vim.split(highlights, " ")[1]
-    highlights = highlights or vim.api.nvim_exec("hi " .. group, true)
-
-    if
-        vim.tbl_contains(conf.exclude_transparency_group, group)
-        or (conf.ignore_linked_group and highlights:match("links to"))
-    then
-        return
-    end
-    pcall(vim.cmd, string.format("hi %s ctermbg=NONE guibg=NONE", group))
-end
-
-local function _clear_bg()
-    if vim.g.transparent_enabled ~= true then
-        return
-    end
-    for _, group in ipairs(conf.transparent_groups) do
-        clear_group_bg(group)
-    end
+    -- Force background to NONE
+    local new_hl = vim.tbl_extend('force', hl, { bg = "NONE", ctermbg = "NONE" })
+    vim.api.nvim_set_hl(0, group, new_hl)
 end
 
 function M.clear_bg()
-    if vim.g.transparent_enabled ~= true then
-        return
+    if not vim.g.transparent_enabled then return end
+
+    for _, group in ipairs(conf.transparent_groups) do
+        pcall(clear_group_bg, group)
     end
-    -- ? some plugins calculate colors from basic highlights
-    -- : clear immediately
-    _clear_bg()
-    -- ? some plugins use autocommands to redefine highlights
-    -- : clear again after a while
-    vim.defer_fn(_clear_bg, 500)
-    -- again
-    vim.defer_fn(_clear_bg, 1000)
-    -- yes, clear 4 times!!!
-    vim.defer_fn(_clear_bg, 5000)
 end
 
 function M.toggle_transparent(option)
@@ -54,10 +37,10 @@ function M.toggle_transparent(option)
     else
         vim.g.transparent_enabled = option
     end
+
+    -- Reload colorscheme to reset; autocmd in init.lua handles re-application
     if vim.g.colors_name then
-        vim.cmd("colorscheme " .. vim.g.colors_name)
-    else
-        vim.cmd("doautocmd ColorScheme")
+        vim.cmd.colorscheme(vim.g.colors_name)
     end
 end
 
